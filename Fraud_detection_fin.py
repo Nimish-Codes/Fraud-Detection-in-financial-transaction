@@ -56,7 +56,7 @@ st.code(classification_report(y_test, y_pred, zero_division=1))  # Handle zero_d
 prediction = model.predict(new_df)
 
 st.subheader('Prediction for User Input:')
-st.write(f'Predicted class for user input: {prediction}')
+# st.write(f'Predicted class for user input: {prediction}')
 
 if prediction == 0:
     st.success('No fraud detected')
