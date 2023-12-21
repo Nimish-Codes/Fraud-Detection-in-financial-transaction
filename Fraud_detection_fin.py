@@ -4,24 +4,15 @@ import streamlit as st
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
-from sklearn.datasets import make_classification
 
-# Generate synthetic dataset
-X, y = make_classification(
-    n_samples=10000,  # Adjust the number of samples as needed
-    n_features=2,
-    n_informative=2,
-    n_redundant=0,
-    n_clusters_per_class=1,
-    weights=[0.95, 0.05],  # Imbalanced class distribution (adjust as needed)
-    flip_y=0,
-    random_state=42
-)
+# Hypothetical imbalanced dataset (replace this with your own dataset)
+data = {
+    'Amount': [100, 200, 150, 300, 500, 50, 80, 120, 200, 400],
+    'Frequency': [5, 10, 7, 8, 20, 3, 4, 6, 15, 12],
+    'IsFraud': [0, 0, 0, 0, 1, 0, 0, 0, 1, 1]  # 1 represents fraud, 0 represents normal
+}
 
-# Create a DataFrame
-columns = ['Amount', 'Frequency']
-df = pd.DataFrame(X, columns=columns)
-df['IsFraud'] = y
+df = pd.DataFrame(data)
 
 # Streamlit App
 st.title('Fraud Detection Model Evaluation')
@@ -33,8 +24,8 @@ st.write(df)
 
 # Input fields for user
 st.sidebar.title('User Input:')
-amount_input = st.sidebar.number_input('Enter Amount:', min_value=0, max_value=100000000000, step=1, value=200)
-frequency_input = st.sidebar.number_input('Enter Frequency:', min_value=0, max_value=20000000, step=1, value=10)
+amount_input = st.sidebar.number_input('Enter Amount:', min_value=0, max_value=1000, step=1, value=200)
+frequency_input = st.sidebar.number_input('Enter Frequency:', min_value=0, max_value=20, step=1, value=10)
 
 # Update the model with the user input
 new_data = {'Amount': [amount_input], 'Frequency': [frequency_input]}
